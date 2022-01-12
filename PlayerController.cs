@@ -5,53 +5,72 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public Collider2D collider;
-    public float JumpForce = 4f;
-    public float MoveSpeed = 5f;
-    bool isJumping = false;
-    
+    private float JumpForce = 50f;
+    private float MoveSpeed = 5f;
+    private bool isJumping = false;
+    private float moveHorizontal;
+    private float moveVertical;
+    public Animator squashStretchAnimator;
+    private bool canswing = true;
+    public float SwordReload = 0f;
+    public Animator SwingAnim;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        bool isJumping = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveVertical = Input.GetAxisRaw("Vertical");
         
+        if (SwordReload >= 0f)
+        {
+            SwordReload -= Time.deltaTime;
+            Debug.Log(SwordReload);
+        }
+        if (SwordReload <= 0f)
+        {
+            canswing = true;
+        }
     }
     
     void FixedUpdate()
     {
-        if (isJumping == false && Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.Q) && canswing == true)
         {
-            rb.AddForce(rb.transform.up * JumpForce);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(rb.transform.right * -MoveSpeed);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(rb.transform.right * MoveSpeed);
+            SwingAnim.SetTrigger("Swing");
+            canswing = false;
+            SwordReload = 3f;
+
         }
         
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Platform"))
+        if (moveHorizontal > 0.1f || moveHorizontal < -0.1f)
         {
-            bool isJumping = false;
+            rb.AddForce(new Vector2(moveHorizontal * MoveSpeed, 0f), ForceMode2D.Impulse);
+        }
+        if (!isJumping && moveVertical > 0.1f )
+        {
+            squashStretchAnimator.SetTrigger("Jump");
+            rb.AddForce(new Vector2(0f, moveVertical * JumpForce), ForceMode2D.Impulse);
         }
     }
-
-    void OnTriggerExit(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Platform"))
+        if (collision.gameObject.tag == "Platform")
         {
-            bool isJumping = true;
+            isJumping = false;
         }
-       
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            isJumping = true;
+        }
     }
 }
