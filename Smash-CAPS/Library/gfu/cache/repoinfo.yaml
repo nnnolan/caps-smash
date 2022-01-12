@@ -13,26 +13,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2022-01-11T21:47:59.570-06:00
-  initializedAtString: 2022-01-11T21:47:59.570-06:00
+  lastUpdatedAtString: 2022-01-12T08:04:11.989-06:00
+  initializedAtString: 2022-01-12T08:04:11.989-06:00
   currentGitRemote:
-    name: 
-    url: 
+    name: origin
+    url: https://github.com/nnnolan/caps-smash.git
     login: 
     user: 
     host: 
     function: 0
     token: 
   currentGitBranch:
-    name: master
-    tracking: 
+    name: main
+    tracking: origin/main
   currentConfigBranch:
-    name: master
+    name: main
     remote:
-      name: 
-      url: 
-    trackingBranch: 
+      name: origin
+      url: https://github.com/nnnolan/caps-smash.git
+    trackingBranch: main
   currentConfigRemote:
-    name: 
-    url: 
+    name: origin
+    url: https://github.com/nnnolan/caps-smash.git
   currentHead: 
