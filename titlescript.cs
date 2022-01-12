@@ -1,35 +1,32 @@
-using Systems.Collections;
-using Systems.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class MainMenu : monobehavior{
-
+public class titlescript : MonoBehaviour
+{
 
     public string newGameScene;
-
-    void initalize() {
-
-
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
-
-    void update(){
-
-
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
-    public void NewGame(){
+    public void NewGame() {
 
         SceneManager.LoadScene(newGameScene);
-
+        
     }
 
     public void QuitGame() {
 
         Application.Quit();
-
     }
-
 }
